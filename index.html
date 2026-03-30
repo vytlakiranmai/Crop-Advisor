@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Advisor</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/frontend/styles.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">🌾 Crop Advisor</h1>
+        
+        <div class="row">
+            <!-- Input Form -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Crop Recommendation</h5>
+                        <form id="cropForm">
+                            <div class="mb-3">
+                                <label for="modelSelect" class="form-label">Select Model</label>
+                                <select class="form-select" id="modelSelect" required>
+                                    <option value="rf">Random Forest (Recommended)</option>
+                                    <option value="svm">Support Vector Machine</option>
+                                    <option value="lr">Logistic Regression</option>
+                                    <option value="knn">K-Nearest Neighbors</option>
+                                </select>
+                                <div class="form-text" id="modelDescription">
+                                    Random Forest - Good all-around model with feature importance
+                                </div>
+                            </div>
+
+                            <!-- Environmental Conditions Section -->
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h6 class="card-subtitle mb-2">Environmental Conditions</h6>
+                                    <div class="mb-2">
+                                        <label for="ph" class="form-label">Soil pH (0-14)</label>
+                                        <input type="number" step="0.1" class="form-control" id="ph" required min="0" max="14">
+                                    </div>
+                                    <div class="mb-2">
+                                        <label for="temperature" class="form-label">Temperature (°C)</label>
+                                        <input type="number" step="0.1" class="form-control" id="temperature" required>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label for="humidity" class="form-label">Humidity (%)</label>
+                                        <input type="number" step="0.1" class="form-control" id="humidity" required min="0" max="100">
+                                    </div>
+                                    <div class="mb-2">
+                                        <label for="rainfall" class="form-label">Annual Rainfall (mm)</label>
+                                        <input type="number" step="0.1" class="form-control" id="rainfall" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-100">Get Recommendation</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Results Display -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Recommendation Results</h5>
+                        <div id="results-container">
+                            <!-- Initial message -->
+                            <div id="initial-message" class="text-center text-muted p-4">
+                                Enter values and click "Get Recommendation" to see results
+                            </div>
+                            <!-- Prediction results will be shown here -->
+                            <div id="prediction" style="display: none;">
+                                <div class="crop-name"></div>
+                                <div class="crop-details-container">
+                                    <h6>Crop Details:</h6>
+                                    <ul class="crop-details"></ul>
+                                </div>
+                                <div class="feature-importance-container">
+                                    <h6>Environmental Factors:</h6>
+                                    <div class="feature-importance"></div>
+                                </div>
+                                <div class="alert alert-info mt-3">
+                                    <small>These recommendations are based on basic environmental factors. 
+                                    Consider consulting with local agricultural experts for more specific advice.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="/frontend/app.js"></script>
+</body>
+</html> 
